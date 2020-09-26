@@ -1,10 +1,16 @@
 
-
+/**
+ * 
+ *  Easy Grid
+ * 
+ */
 import React, { Component } from 'react';
-import { Platform, Dimensions, Image, TouchableOpacity, TouchableHighlight, ScrollView, FlatList, Alert, Button, StyleSheet, Text, TextInput, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, ActivityIndicator, FlatList, View} from 'react-native';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base'
+import {Col, Row, Grid} from 'react-native-easy-grid'
 
+export default class Demo extends Component {
 
-export default class TouchableDemo extends Component {
   state = {
     list: []
   }
@@ -18,89 +24,530 @@ export default class TouchableDemo extends Component {
     this.setState({ list })
   }
 
-  renderItem = (item) => {
-    return (
-     <TouchableOpacity
-     onPress = {() => Alert.alert(`You clicked ${item.key}`)}
-     style={ {backgroundColor:'#D4AF37'} }>
-        <Text style={styles.item}>{item.key}</Text>
-     </TouchableOpacity>
-    );
-  }
+  renderItem = (item) => <Text style={styles.item}>{item.key}</Text>
 
   renderSeparator = () => <View style={styles.separator} />
 
   renderHeader = () => {
-    const {height, width} = Dimensions.get('screen');
-    const isPortrait = (width > height) ? true : false;
-    const backgroundColor = (isPortrait) ? '#a9a9a9' : '#555eee';
-    const headerText  = (Platform.OS === 'ios') ? 'iOs' : 'Android';
-    return(
-      <View style={{ height: height/5, backgroundColor }}>
-        <Text style={styles.headerText}> Header Platform is {headerText} </Text>
+    return (
+      <View style={styles.header}>
+        <Text style={styles.headerText}> Header </Text>
       </View>
     )
   }
 
   renderFooter = () => {
-    return(
+    return (
       <View style={styles.header}>
         <Text style={styles.headerText}> Footer </Text>
       </View>
     )
   }
-  
-   render() {
+
+  // green #91F58C
+//red #F58C9A
+//blue #ADD9FE
+
+  render() {
     return (
-      <View style={{ flex: 1}}>
-       {
-   
-         (this.state.list.length) ?
-            <FlatList
-              style={styles.list}
-              data={this.state.list}
-              renderItem={({ item }) => this.renderItem(item)}
-              ItemSeparatorComponent={this.renderSeparator}
-              ListHeaderComponent={this.renderHeader}
-              ListFooterComponent={this.renderFooter}
-              onEndReached={() => this.fillList(this.state.list.length + 50)}
-              onEndReachedThreshold={0.1}
-            /> : <ActivityIndicator />
-       }
-       </View>
+      <Container>
+        <Header>
+          <Left>
+            <Button transparent>
+              <Icon ios='ios-menu' android="md-menu" style={{fontSize: 20, color: 'red'}}/>
+            </Button>
+          </Left>
+          <Body>
+            <Title>
+              Header
+            </Title>
+          </Body>
+          <Right>
+            <Icon name='add' />
+          </Right>
+        </Header>
+        <Grid>
+          <Col style={{backgroundColor: '#ADD9FE'}} size={2}>
+            <Text>1st col</Text>
+          </Col>
+          <Col size={1}>
+            <Row style={{backgroundColor: '#91F58C'}}>
+              <Text>
+                First Row
+              </Text>
+            </Row>
+            <Row style={{backgroundColor: '#B2ABE8'}}>
+            <Text>
+                Second Row
+              </Text>
+            </Row>
+          </Col>
+        </Grid>
+        <Footer>
+          <FooterTab>
+            <Button full>
+              <Text>Footer</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
     );
   }
 }
 
+//two containers in half - red and white
 const styles = StyleSheet.create(
   {
-    headerText:{
+    headerText: {
       fontSize: 30,
-      color: '#000000'
+      color: '#ffff'
     },
-
+    header: {
+      height: 100,
+      backgroundColor: '#a9a9a9a9'
+    },
     separator: {
-       height: 10,
-       backgroundColor: '#D4AF37'
+      height: 10,
+      backgroundColor: '#D4AF37'
     },
-  item: {
-    flex: 1,
-    borderColor: 'black',
-    borderWidth: 1
-  },
-  list: {
-    marginTop: 50,
-    marginBottom: 50
+    item: {
+      flex: 1,
+      borderColor: 'black',
+      borderWidth: 1
+    },
+    list: {
+      marginTop: 50,
+      marginBottom: 50
+    }
   }
-}
 )
 
 
 
+
 /**
+ * Native base
  * 
+ */
+// import React, { Component } from 'react';
+// import { StyleSheet, ActivityIndicator, FlatList, View} from 'react-native';
+// import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base'
+
+
+// export default class Demo extends Component {
+
+//   state = {
+//     list: []
+//   }
+
+//   componentDidMount() {
+//     setTimeout(() => this.fillList(100), 1000);
+//   }
+
+//   fillList = (numberOfRows) => {
+//     const list = [...Array(numberOfRows)].map((x, i) => ({ key: `item ${i}` }));
+//     this.setState({ list })
+//   }
+
+//   renderItem = (item) => <Text style={styles.item}>{item.key}</Text>
+
+//   renderSeparator = () => <View style={styles.separator} />
+
+//   renderHeader = () => {
+//     return (
+//       <View style={styles.header}>
+//         <Text style={styles.headerText}> Header </Text>
+//       </View>
+//     )
+//   }
+
+//   renderFooter = () => {
+//     return (
+//       <View style={styles.header}>
+//         <Text style={styles.headerText}> Footer </Text>
+//       </View>
+//     )
+//   }
+
+
+//   render() {
+//     return (
+//       <Container>
+//         <Header>
+//           <Left>
+//             <Button transparent>
+//               <Icon ios='ios-menu' android="md-menu" style={{fontSize: 20, color: 'red'}}/>
+//             </Button>
+//           </Left>
+//           <Body>
+//             <Title>
+//               Header
+//             </Title>
+//           </Body>
+//           <Right>
+//             <Icon name='add' />
+//           </Right>
+//         </Header>
+//         <Content>
+//           {
+//             (this.state.list.length) ?
+//               <FlatList
+//                 style={styles.list}
+//                 data={this.state.list}
+//                 renderItem={({ item }) => this.renderItem(item)}
+//                 ItemSeparatorComponent={this.renderSeparator}
+//                 ListHeaderComponent={this.renderHeader}
+//                 ListFooterComponent={this.renderFooter}
+//               /> : <ActivityIndicator />
+//           }
+//         </Content>
+//         <Footer>
+//           <FooterTab>
+//             <Button full>
+//               <Text>Footer</Text>
+//             </Button>
+//           </FooterTab>
+//         </Footer>
+//       </Container>
+//     );
+//   }
+// }
+
+// //two containers in half - red and white
+// const styles = StyleSheet.create(
+//   {
+//     headerText: {
+//       fontSize: 30,
+//       color: '#ffff'
+//     },
+//     header: {
+//       height: 100,
+//       backgroundColor: '#a9a9a9a9'
+//     },
+//     separator: {
+//       height: 10,
+//       backgroundColor: '#D4AF37'
+//     },
+//     item: {
+//       flex: 1,
+//       borderColor: 'black',
+//       borderWidth: 1
+//     },
+//     list: {
+//       marginTop: 50,
+//       marginBottom: 50
+//     }
+//   }
+// )
+
+
+
+
+
+
+/**
+ * Flex box deep dive
+ *
+ */
+
+// import React, { Component } from 'react';
+// import { Image, StyleSheet, Text, View} from 'react-native';
+
+
+// export default class TouchableDemo extends Component {
+
+
+//   // render() {
+//   //   return (
+
+//   //     <View style={styles.container} >
+//   //     <Text style={styles.text} />
+//   //     </View>
+//   //   );
+//   // }
+
+//   //two containers in half - red and white
+//    render() {
+//     return (
+
+//       <View style={styles.container} >
+//       <View style ={styles.halfContainer}/>
+//       <View style ={styles.halfContainerWhite}/>
+//       </View>
+//     );
+//   }
+// }
+
+// //two containers in half - red and white
+// const styles = StyleSheet.create(
+//   {
+//     halfContainer: {
+//       flex: 1,
+//       backgroundColor: '#E7141B'
+//     },
+//     halfContainerWhite: {
+//       flex: 1,
+//       backgroundColor: '#ffff'
+//     },
+//     container:{
+//       flex: 1,
+//       justifyContent: 'center',
+//       alignItems: 'stretch', // change with center
+//       backgroundColor: '#D4AF37'
+//     }
+// }
+// )
+
+
+/**
+ *
+ *  Flex introduction
+ *
+ */
+// import React, { Component } from 'react';
+// import { Image, StyleSheet, Text, View} from 'react-native';
+
+
+// export default class TouchableDemo extends Component {
+
+
+//   // render() {
+//   //   return (
+
+//   //     <View style={styles.container} >
+//   //     <Text style={styles.text} />
+//   //     </View>
+//   //   );
+//   // }
+
+//   //two containers in half - red and white
+//    render() {
+//     return (
+
+//       <View style={styles.container} >
+//       <View style ={styles.halfContainer}/>
+//       <View style ={styles.halfContainerWhite}/>
+//       </View>
+//     );
+//   }
+// }
+
+// //two containers in half - red and white
+// const styles = StyleSheet.create(
+//   {
+//     halfContainer: {
+//       flex: 1,
+//       backgroundColor: '#E7141B'
+//     },
+//     halfContainerWhite: {
+//       flex: 1,
+//       backgroundColor: '#ffff'
+//     },
+//     container:{
+//       flex: 1,
+//       justifyContent: 'center',
+//       alignItems: 'stretch', // change with center
+//       backgroundColor: '#D4AF37'
+//     }
+// }
+// )
+
+////three element stretched in colum in the center
+// const styles = StyleSheet.create(
+//   {
+//     container:{
+//       flex: 1,
+//       justifyContent: 'center',
+//       alignItems: 'stretch', // change with center
+//       backgroundColor: '#D4AF37'
+//     },
+//     text:{
+//       fontSize: 20,
+//       textAlign: 'center',
+//       margin: 10,
+//       backgroundColor: '#ffff'
+//     }
+// }
+// )
+
+////three element in a row at the beginning with space |   |   |
+// const styles = StyleSheet.create(
+//   {
+//     container:{
+//       flex: 1,
+//       flexDirection: 'row',
+//       justifyContent: 'space-between',
+//       alignItems: 'flex-start',
+//       backgroundColor: '#D4AF37'
+//     },
+//     text:{
+//       top: 100,
+//       backgroundColor: '#ffff'
+//     }
+// }
+// )
+
+
+////three element in a row one after another
+// const styles = StyleSheet.create(
+//   {
+//     container:{
+//       flex: 1,
+//       flexDirection: 'row',
+//       justifyContent: 'flex-start',
+//       alignItems: 'flex-start',
+//       backgroundColor: '#D4AF37'
+//     },
+//     text:{
+//       top: 100,
+//       backgroundColor: '#ffff'
+//     }
+// }
+// )
+
+//one element at the beginning
+// const styles = StyleSheet.create(
+//   {
+//     container:{
+//       flex: 1,
+//       justifyContent: 'flex-start',
+//       alignItems: 'flex-start',
+//       backgroundColor: '#D4AF37'
+//     },
+//     text:{
+//       top: 100,
+//       backgroundColor: '#ffff'
+//     }
+// }
+// )
+
+// one element in the center
+// const styles = StyleSheet.create(
+//   {
+//     container:{
+//       flex: 1,
+//       justifyContent: 'center',
+//       alignItems: 'center',
+//       backgroundColor: '#D4AF37'
+//     },
+//     text:{
+//       textAlign: 'center',
+//       backgroundColor: '#ffff'
+//     }
+// }
+// )
+
+
+
+
+
+/**
+ * Use Platform and Dimensions
+ *
+ */
+// import React, { Component } from 'react';
+// import { Platform, Dimensions, Image, TouchableOpacity, TouchableHighlight, ScrollView, FlatList, Alert, Button, StyleSheet, Text, TextInput, View, ActivityIndicator } from 'react-native';
+
+
+// export default class TouchableDemo extends Component {
+//   state = {
+//     list: []
+//   }
+
+//   componentDidMount() {
+//     setTimeout(() => this.fillList(100), 1000);
+//   }
+
+//   fillList = (numberOfRows) => {
+//     const list = [...Array(numberOfRows)].map((x, i) => ({ key: `item ${i}` }));
+//     this.setState({ list })
+//   }
+
+//   renderItem = (item) => {
+//     return (
+//      <TouchableOpacity
+//      onPress = {() => Alert.alert(`You clicked ${item.key}`)}
+//      style={ {backgroundColor:'#D4AF37'} }>
+//         <Text style={styles.item}>{item.key}</Text>
+//      </TouchableOpacity>
+//     );
+//   }
+
+//   renderSeparator = () => <View style={styles.separator} />
+
+//   renderHeader = () => {
+//     const {height, width} = Dimensions.get('screen');
+//     const isPortrait = (width > height) ? true : false;
+//     const backgroundColor = (isPortrait) ? '#a9a9a9' : '#555eee';
+//     const headerText  = (Platform.OS === 'ios') ? 'iOs' : 'Android';
+//     return(
+//       <View style={{ height: height/5, backgroundColor }}>
+//         <Text style={styles.headerText}> Header Platform is {headerText} </Text>
+//       </View>
+//     )
+//   }
+
+//   renderFooter = () => {
+//     return(
+//       <View style={styles.header}>
+//         <Text style={styles.headerText}> Footer </Text>
+//       </View>
+//     )
+//   }
+
+//    render() {
+//     return (
+//       <View style={{ flex: 1}}>
+//        {
+
+//          (this.state.list.length) ?
+//             <FlatList
+//               style={styles.list}
+//               data={this.state.list}
+//               renderItem={({ item }) => this.renderItem(item)}
+//               ItemSeparatorComponent={this.renderSeparator}
+//               ListHeaderComponent={this.renderHeader}
+//               ListFooterComponent={this.renderFooter}
+//               onEndReached={() => this.fillList(this.state.list.length + 50)}
+//               onEndReachedThreshold={0.1}
+//             /> : <ActivityIndicator />
+//        }
+//        </View>
+//     );
+//   }
+// }
+
+// const styles = StyleSheet.create(
+//   {
+//     headerText:{
+//       fontSize: 30,
+//       color: '#000000'
+//     },
+
+//     separator: {
+//        height: 10,
+//        backgroundColor: '#D4AF37'
+//     },
+//   item: {
+//     flex: 1,
+//     borderColor: 'black',
+//     borderWidth: 1
+//   },
+//   list: {
+//     marginTop: 50,
+//     marginBottom: 50
+//   }
+// }
+// )
+
+
+
+
+
+/**
+ *
  *  Zoom image
- * 
+ *
  */
 // import React, { Component } from 'react';
 // import { Image, TouchableOpacity, TouchableHighlight, ScrollView, FlatList, Alert, Button, StyleSheet, Text, TextInput, View, ActivityIndicator } from 'react-native';
@@ -157,7 +604,7 @@ const styles = StyleSheet.create(
 //          maximumZoomScale={2}
 //          minimumZoomScale={1}
 //          >
-       
+
 //          <TouchableHighlight>
 //            <Image style={{width: 300, height: 300}}
 //              source={{uri: 'https://cdnuploads.aa.com.tr/uploads/Contents/2020/05/14/thumbs_b_c_88bedbc66bb57f0e884555e8250ae5f9.jpg?v=140708'}}/>
@@ -195,11 +642,14 @@ const styles = StyleSheet.create(
 // )
 
 
+
+
+
 /**
+ *
+ *
  *   Touchables
- * 
- * 
- * 
+ *
  */
 
 // import React, { Component } from 'react';
@@ -253,7 +703,7 @@ const styles = StyleSheet.create(
 //     return (
 //       <View style={{ flex: 1}}>
 //        {
-   
+
 //          (this.state.list.length) ?
 //             <FlatList
 //               style={styles.list}
@@ -298,10 +748,14 @@ const styles = StyleSheet.create(
 // )
 
 
+
+
+
+
 /****
- * 
+ *
  *   FlatList
- * 
+ *
  */
 
 // import React, { Component } from 'react';
@@ -653,3 +1107,9 @@ const styles = StyleSheet.create(
 // });
 
 // export default App;
+
+
+
+// green #91F58C
+//red #F58C9A
+//blue #B2ABE8
