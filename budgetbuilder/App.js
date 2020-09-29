@@ -1,13 +1,10 @@
 
-/**
- * 
- *  Easy Grid
- * 
- */
 import React, { Component } from 'react';
 import { StyleSheet, ActivityIndicator, FlatList, View} from 'react-native';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base'
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, StyleProvider } from 'native-base'
 import {Col, Row, Grid} from 'react-native-easy-grid'
+import getTheme from './native-base-theme/components'
+import material from './native-base-theme/variables/material'
 
 export default class Demo extends Component {
 
@@ -44,12 +41,13 @@ export default class Demo extends Component {
     )
   }
 
-  // green #91F58C
-//red #F58C9A
-//blue #ADD9FE
+  //green #91F58C
+ //red #F58C9A
+ //blue #ADD9FE
 
   render() {
     return (
+      <StyleProvider style={getTheme(material)}>
       <Container>
         <Header>
           <Left>
@@ -91,6 +89,7 @@ export default class Demo extends Component {
           </FooterTab>
         </Footer>
       </Container>
+      </StyleProvider>
     );
   }
 }
@@ -121,6 +120,133 @@ const styles = StyleSheet.create(
     }
   }
 )
+
+
+
+
+
+/**
+ * 
+ *  Easy Grid
+ * 
+ */
+// import React, { Component } from 'react';
+// import { StyleSheet, ActivityIndicator, FlatList, View} from 'react-native';
+// import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base'
+// import {Col, Row, Grid} from 'react-native-easy-grid'
+
+// export default class Demo extends Component {
+
+//   state = {
+//     list: []
+//   }
+
+//   componentDidMount() {
+//     setTimeout(() => this.fillList(100), 1000);
+//   }
+
+//   fillList = (numberOfRows) => {
+//     const list = [...Array(numberOfRows)].map((x, i) => ({ key: `item ${i}` }));
+//     this.setState({ list })
+//   }
+
+//   renderItem = (item) => <Text style={styles.item}>{item.key}</Text>
+
+//   renderSeparator = () => <View style={styles.separator} />
+
+//   renderHeader = () => {
+//     return (
+//       <View style={styles.header}>
+//         <Text style={styles.headerText}> Header </Text>
+//       </View>
+//     )
+//   }
+
+//   renderFooter = () => {
+//     return (
+//       <View style={styles.header}>
+//         <Text style={styles.headerText}> Footer </Text>
+//       </View>
+//     )
+//   }
+
+  // green #91F58C
+//red #F58C9A
+//blue #ADD9FE
+
+//   render() {
+//     return (
+//       <Container>
+//         <Header>
+//           <Left>
+//             <Button transparent>
+//               <Icon ios='ios-menu' android="md-menu" style={{fontSize: 20, color: 'red'}}/>
+//             </Button>
+//           </Left>
+//           <Body>
+//             <Title>
+//               Header
+//             </Title>
+//           </Body>
+//           <Right>
+//             <Icon name='add' />
+//           </Right>
+//         </Header>
+//         <Grid>
+//           <Col style={{backgroundColor: '#ADD9FE'}} size={2}>
+//             <Text>1st col</Text>
+//           </Col>
+//           <Col size={1}>
+//             <Row style={{backgroundColor: '#91F58C'}}>
+//               <Text>
+//                 First Row
+//               </Text>
+//             </Row>
+//             <Row style={{backgroundColor: '#B2ABE8'}}>
+//             <Text>
+//                 Second Row
+//               </Text>
+//             </Row>
+//           </Col>
+//         </Grid>
+//         <Footer>
+//           <FooterTab>
+//             <Button full>
+//               <Text>Footer</Text>
+//             </Button>
+//           </FooterTab>
+//         </Footer>
+//       </Container>
+//     );
+//   }
+// }
+
+// //two containers in half - red and white
+// const styles = StyleSheet.create(
+//   {
+//     headerText: {
+//       fontSize: 30,
+//       color: '#ffff'
+//     },
+//     header: {
+//       height: 100,
+//       backgroundColor: '#a9a9a9a9'
+//     },
+//     separator: {
+//       height: 10,
+//       backgroundColor: '#D4AF37'
+//     },
+//     item: {
+//       flex: 1,
+//       borderColor: 'black',
+//       borderWidth: 1
+//     },
+//     list: {
+//       marginTop: 50,
+//       marginBottom: 50
+//     }
+//   }
+// )
 
 
 
