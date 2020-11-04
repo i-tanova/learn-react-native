@@ -1,10 +1,8 @@
 
 import React, { Component } from 'react';
-import { Col, Row, Grid } from 'react-native-easy-grid'
-import { StyleSheet, ActivityIndicator, FlatList, View } from 'react-native';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, StyleProvider } from 'native-base'
-import getTheme from '../native-base-theme/components'
-import material from '../native-base-theme/variables/material'
+import { Container, Header, Title, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, StyleProvider } from 'native-base';
+import getTheme from '../native-base-theme/components';
+import material from '../native-base-theme/variables/material';
 import commonColor from '../native-base-theme/variables/commonColor';
 
 export default class Layout extends Component {
